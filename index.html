@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>금견적 · 금은방 카톡 매입 견적 카드</title>
+  <meta name="description" content="금은방 사장님용 매입 견적 카드 메이커. 오늘 시세만 넣으면 카톡 문의에 매장명·시각·단가·유효시간이 찍힌 확정 견적 이미지를 30초 만에 보냅니다. 설치·로그인 없음." />
+  <meta name="theme-color" content="#14213d" />
+  <meta property="og:title" content="금견적 · 금은방 카톡 매입 견적 카드" />
+  <meta property="og:description" content="오늘 시세만 넣으면 카톡으로 보낼 확정 매입 견적 카드가 30초 만에." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="appbar">
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/icon.svg" alt="" width="28" height="28" />
+      <div>
+        <strong>금견적</strong>
+        <span id="topShop" class="muted">매장명을 설정하세요</span>
+      </div>
+    </div>
+    <button id="topPrice" class="price-chip" type="button" data-goto="price" aria-label="오늘 시세 입력으로 이동">시세 미입력</button>
+  </header>
+  <nav class="tabbar" aria-label="메뉴">
+    <button type="button" data-tab="quote" class="active"><span>🧾</span>견적</button>
+    <button type="button" data-tab="price"><span>📈</span>시세</button>
+    <button type="button" data-tab="history"><span>🗂️</span>기록</button>
+    <button type="button" data-tab="settings"><span>⚙️</span>설정</button>
+  </nav>
+  </div>
+
+  <main id="app">
+    <!-- 1. 견적 작성 -->
+    <section id="view-quote" class="view active" aria-labelledby="h-quote">
+      <div id="onboarding" class="card onboarding" hidden>
+        <h2>👋 3단계면 첫 견적 카드 완성</h2>
+        <ol>
+          <li><b>설정</b>에서 매장명·연락처 입력</li>
+          <li><b>시세</b>에서 오늘 순금 1돈 매입가 입력</li>
+          <li><b>견적</b>에서 품목·중량 넣고 카드 만들기</li>
+        </ol>
+        <div class="row gap">
+          <button id="btnDemo" class="btn gold" type="button">예시 데이터로 바로 체험</button>
+          <button class="btn ghost" type="button" data-goto="settings">직접 설정하기</button>
+        </div>
+        <p class="hint">예시 데이터의 시세·매장 정보는 가상의 값입니다. 실제 사용 전 꼭 수정하세요.</p>
+      </div>
+
+      <h1 id="h-quote" class="section-title">매입 견적 작성</h1>
+      <div class="card">
+        <div class="grid2">
+          <label class="field">
+            <span>손님 (선택)</span>
+            <input id="qCustomer" type="text" maxlength="20" placeholder="예: 김OO 님 / 카톡 닉네임" />
+          </label>
+          <label class="field">
+            <span>유효시간</span>
+            <select id="qValid">
+              <option value="30">30분</option>
+              <option value="60">1시간</option>
+              <option value="120">2시간</option>
+              <option value="180">3시간</option>
+              <option value="eod">오늘 영업 종료까지</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div id="items"></div>
+      <button id="btnAddItem" class="btn outline block" type="button">＋ 품목 추가</button>
+
+      <label class="field card">
+        <span>메모 (견적 카드에 표시)</span>
+        <input id="qMemo" type="text" maxlength="60" placeholder="예: 큐빅 제거 후 실중량 기준" />
+      </label>
+
+      <div class="sticky-total">
+        <div>
+          <span class="muted">예상 매입 합계</span>
+          <strong id="qTotal">0원</strong>
+        </div>
+        <button id="btnMakeCard" class="btn gold" type="button">견적 카드 만들기</button>
+      </div>
+    </section>
+
+    <!-- 2. 오늘 시세 -->
+    <section id="view-price" class="view" aria-labelledby="h-price">
+      <h1 id="h-price" class="section-title">오늘 매입 시세</h1>
+      <div class="card">
+        <label class="field">
+          <span>순금(24K) 1돈(3.75g) <b>매입가</b></span>
+          <div class="input-unit">
+            <input id="pBase" type="text" inputmode="numeric" placeholder="예: 690,000" autocomplete="off" />
+            <em>원</em>
+          </div>
+        </label>
+        <p class="hint" id="pUpdated">아직 입력하지 않았어요. 거래소 고시가 또는 매장 기준가를 넣으세요.</p>
+        <button id="btnSavePrice" class="btn gold block" type="button">시세 저장</button>
+      </div>
+
+      <h2 class="sub-title">순도별 1돈 매입 단가</h2>
+      <p class="hint">단가 = 순금 매입가 × 금 함량 × 적용률. 매장 정책에 맞게 적용률을 바꾸거나 단가를 직접 입력하세요.</p>
+      <div class="card table-card">
+        <table class="purity-table">
+          <thead><tr><th>순도</th><th>적용률(%)</th><th>직접 입력</th><th>1돈 단가</th></tr></thead>
+          <tbody id="purityRows"></tbody>
+        </table>
+      </div>
+
+      <h2 class="sub-title">"오늘 얼마예요?" 답장</h2>
+      <div class="card">
+        <pre id="priceText" class="pre"></pre>
+        <button id="btnCopyPriceText" class="btn outline block" type="button">단가 안내 문구 복사</button>
+      </div>
+    </section>
+
+    <!-- 3. 견적 기록 -->
+    <section id="view-history" class="view" aria-labelledby="h-history">
+      <h1 id="h-history" class="section-title">견적 기록</h1>
+      <div class="stats">
+        <div class="stat"><span>발행</span><strong id="sCount">0</strong></div>
+        <div class="stat"><span>방문율</span><strong id="sVisit">-</strong></div>
+        <div class="stat"><span>매입 성사</span><strong id="sBought">-</strong></div>
+        <div class="stat"><span>성사 금액</span><strong id="sAmount">0원</strong></div>
+      </div>
+      <p class="hint">견적 후 손님이 오셨는지 표시해 두면, 어떤 단가에서 방문이 많은지 보입니다. 기록은 이 기기에만 저장됩니다.</p>
+      <div id="historyList"></div>
+    </section>
+
+    <!-- 4. 설정 -->
+    <section id="view-settings" class="view" aria-labelledby="h-settings">
+      <h1 id="h-settings" class="section-title">매장 설정</h1>
+      <div class="card">
+        <label class="field"><span>매장명 *</span><input id="sName" type="text" maxlength="24" placeholder="예: 행복금은방" /></label>
+        <label class="field"><span>전화번호</span><input id="sPhone" type="tel" maxlength="20" placeholder="예: 02-123-4567" /></label>
+        <label class="field"><span>주소</span><input id="sAddr" type="text" maxlength="60" placeholder="예: 서울 종로구 종로 123 1층" /></label>
+        <label class="field"><span>카카오톡 채널 / 오픈채팅 링크</span><input id="sKakao" type="url" maxlength="120" placeholder="https://pf.kakao.com/..." /></label>
+        <label class="field"><span>견적 안내 문구</span><textarea id="sNote" rows="3" maxlength="120"></textarea></label>
+        <div class="grid2">
+          <label class="field">
+            <span>금액 절사 단위</span>
+            <select id="sRound">
+              <option value="1">1원</option>
+              <option value="10">10원</option>
+              <option value="100">100원</option>
+              <option value="1000">1,000원</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>기본 유효시간</span>
+            <select id="sValid">
+              <option value="30">30분</option>
+              <option value="60">1시간</option>
+              <option value="120">2시간</option>
+              <option value="180">3시간</option>
+              <option value="eod">오늘 영업 종료까지</option>
+            </select>
+          </label>
+        </div>
+        <label class="field"><span>영업 종료 시각</span><input id="sClose" type="time" value="20:00" /></label>
+        <button id="btnSaveShop" class="btn gold block" type="button">설정 저장</button>
+      </div>
+
+      <h2 class="sub-title">데이터</h2>
+      <div class="card row gap wrap">
+        <button id="btnExport" class="btn outline" type="button">백업 파일 내보내기</button>
+        <label class="btn outline file-btn">백업 불러오기<input id="fileImport" type="file" accept="application/json" hidden /></label>
+        <button id="btnReset" class="btn danger" type="button">전체 초기화</button>
+      </div>
+
+      <h2 class="sub-title">우리 매장 전용 버전 신청</h2>
+      <div class="card">
+        <p class="hint">로고·매장 색상 적용, 카카오톡 채널 버튼, 매장 전용 주소 세팅을 원하시면 남겨 주세요. 확인 후 연락드립니다.</p>
+        <form id="leadForm" name="custom-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="custom-request" />
+          <p hidden><label>비워두세요 <input name="bot-field" /></label></p>
+          <input type="hidden" name="ref" id="leadRef" value="direct" />
+          <label class="field"><span>매장명 *</span><input name="shop" required maxlength="40" /></label>
+          <label class="field"><span>연락처 (전화/카톡 ID) *</span><input name="contact" required maxlength="40" /></label>
+          <label class="field"><span>원하시는 기능</span><textarea name="message" rows="3" maxlength="500" placeholder="예: 은(실버) 시세도 넣고 싶어요"></textarea></label>
+          <button class="btn gold block" type="submit">신청 보내기</button>
+          <p id="leadMsg" class="hint" role="status"></p>
+        </form>
+      </div>
+      <p class="footer-note">금견적은 계산 보조 도구이며, 최종 매입가는 실물 순도·중량 확인 후 매장이 확정합니다. 모든 데이터는 이 브라우저(localStorage)에만 저장됩니다.</p>
+    </section>
+
+    <!-- 공유 링크로 연 손님용 화면 -->
+    <section id="view-shared" class="view" aria-labelledby="h-shared">
+      <h1 id="h-shared" class="section-title">매입 견적서</h1>
+      <div id="sharedCard"></div>
+      <div id="sharedActions" class="row gap wrap"></div>
+      <p class="footer-note">이 견적서는 매장이 금견적으로 발행한 참고용 견적입니다. 실물 확인 후 최종 금액이 확정됩니다.</p>
+      <a class="btn ghost block" href="./">나도 금견적 써보기 (사장님용)</a>
+    </section>
+  </main>
+
+
+  <dialog id="previewDialog" aria-labelledby="previewTitle">
+    <div class="sheet">
+      <div class="sheet-head">
+        <strong id="previewTitle">견적 카드 미리보기</strong>
+        <button id="btnClosePreview" class="icon-btn" type="button" aria-label="닫기">✕</button>
+      </div>
+      <div id="previewCard"></div>
+      <div class="share-grid">
+        <button id="btnShareImg" class="btn gold" type="button">이미지 공유/저장</button>
+        <button id="btnCopyText" class="btn outline" type="button">카톡 문구 복사</button>
+        <button id="btnCopyLink" class="btn outline" type="button">견적 링크 복사</button>
+      </div>
+      <p class="hint">카톡에 이미지를 보내거나, 링크를 보내면 손님이 휴대폰에서 견적서를 바로 봅니다.</p>
+    </div>
+  </dialog>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

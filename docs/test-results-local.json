@@ -1,0 +1,312 @@
+{
+  "base": "http://localhost:8080/",
+  "at": "2026-09-28T04:25:16.516Z",
+  "pass": 38,
+  "total": 38,
+  "results": [
+    {
+      "vp": "desktop",
+      "id": "T01",
+      "name": "초기 로딩·온보딩 표시",
+      "ok": true,
+      "ms": 1060,
+      "note": "HTTP 200, title=\"금견적 · 금은방 카톡 매입 견적 카드\""
+    },
+    {
+      "vp": "desktop",
+      "id": "T02",
+      "name": "매장명 없이 카드 만들기 → 설정으로 안내",
+      "ok": true,
+      "ms": 56,
+      "note": ""
+    },
+    {
+      "vp": "desktop",
+      "id": "T03",
+      "name": "매장 설정 필수값 검증 및 저장",
+      "ok": true,
+      "ms": 1086,
+      "note": ""
+    },
+    {
+      "vp": "desktop",
+      "id": "T04",
+      "name": "시세 입력 검증·저장·순도별 단가 계산",
+      "ok": true,
+      "ms": 1137,
+      "note": "18K 491,625원, 14K 383,467원"
+    },
+    {
+      "vp": "desktop",
+      "id": "T05",
+      "name": "적용률 변경·단가 직접 입력 반영",
+      "ok": true,
+      "ms": 42,
+      "note": "22K 90% → 569,457원, 직접입력 600,000원 확인 후 원복"
+    },
+    {
+      "vp": "desktop",
+      "id": "T06",
+      "name": "\"오늘 얼마예요?\" 단가 안내 문구 복사",
+      "ok": true,
+      "ms": 42,
+      "note": "[행복금은방] 9/28(월) 13:24 기준 매입 단가 (1돈=3.75g)"
+    },
+    {
+      "vp": "desktop",
+      "id": "T07",
+      "name": "견적 작성: 필수값 검증 + 3개 품목 합계",
+      "ok": true,
+      "ms": 582,
+      "note": "합계 1,854,300원"
+    },
+    {
+      "vp": "desktop",
+      "id": "T08",
+      "name": "공제 중량 > 총중량 오류 표시·삭제 버튼",
+      "ok": true,
+      "ms": 97,
+      "note": ""
+    },
+    {
+      "vp": "desktop",
+      "id": "T09",
+      "name": "견적 카드 만들기 → 미리보기",
+      "ok": true,
+      "ms": 138,
+      "note": "Q260928-001"
+    },
+    {
+      "vp": "desktop",
+      "id": "T10",
+      "name": "이미지 공유/저장 → PNG 생성",
+      "ok": true,
+      "ms": 222,
+      "note": "금견적-Q260928-001.png 1080x1408, 188KB"
+    },
+    {
+      "vp": "desktop",
+      "id": "T11",
+      "name": "카톡 문구 복사",
+      "ok": true,
+      "ms": 43,
+      "note": "15줄"
+    },
+    {
+      "vp": "desktop",
+      "id": "T12",
+      "name": "견적 링크 → 손님용 화면 (새 브라우저, 저장 데이터 없음)",
+      "ok": true,
+      "ms": 1622,
+      "note": "링크 길이 732자"
+    },
+    {
+      "vp": "desktop",
+      "id": "T13",
+      "name": "기록: 상태 변경·통계·새로고침 유지",
+      "ok": true,
+      "ms": 1318,
+      "note": ""
+    },
+    {
+      "vp": "desktop",
+      "id": "T14",
+      "name": "전용 버전 신청 폼 (전송은 모의 응답)",
+      "ok": true,
+      "ms": 362,
+      "note": "POST 본문에 form-name=custom-request, ref=e2e-test(유입 채널) 포함 확인"
+    },
+    {
+      "vp": "desktop",
+      "id": "T15",
+      "name": "백업 내보내기(JSON)",
+      "ok": true,
+      "ms": 40,
+      "note": "금견적-백업-260928.json"
+    },
+    {
+      "vp": "desktop",
+      "id": "T16",
+      "name": "레이아웃: 모든 탭 가로 스크롤 없음",
+      "ok": true,
+      "ms": 186,
+      "note": "시세표 폭 606/606px"
+    },
+    {
+      "vp": "desktop",
+      "id": "T17",
+      "name": "전체 초기화 → 예시 데이터 체험 흐름",
+      "ok": true,
+      "ms": 1928,
+      "note": "예시 합계 1,854,300원"
+    },
+    {
+      "vp": "desktop",
+      "id": "T18b",
+      "name": "조작 요소가 다른 레이어(호스팅 배지 등)에 가려지지 않음",
+      "ok": true,
+      "ms": 96,
+      "note": "8개 요소 elementFromPoint 확인"
+    },
+    {
+      "vp": "desktop",
+      "id": "T18",
+      "name": "콘솔 에러 0건",
+      "ok": true,
+      "ms": 0,
+      "note": ""
+    },
+    {
+      "vp": "mobile",
+      "id": "T01",
+      "name": "초기 로딩·온보딩 표시",
+      "ok": true,
+      "ms": 1097,
+      "note": "HTTP 200, title=\"금견적 · 금은방 카톡 매입 견적 카드\""
+    },
+    {
+      "vp": "mobile",
+      "id": "T02",
+      "name": "매장명 없이 카드 만들기 → 설정으로 안내",
+      "ok": true,
+      "ms": 56,
+      "note": ""
+    },
+    {
+      "vp": "mobile",
+      "id": "T03",
+      "name": "매장 설정 필수값 검증 및 저장",
+      "ok": true,
+      "ms": 1104,
+      "note": ""
+    },
+    {
+      "vp": "mobile",
+      "id": "T04",
+      "name": "시세 입력 검증·저장·순도별 단가 계산",
+      "ok": true,
+      "ms": 1144,
+      "note": "18K 491,625원, 14K 383,467원"
+    },
+    {
+      "vp": "mobile",
+      "id": "T05",
+      "name": "적용률 변경·단가 직접 입력 반영",
+      "ok": true,
+      "ms": 37,
+      "note": "22K 90% → 569,457원, 직접입력 600,000원 확인 후 원복"
+    },
+    {
+      "vp": "mobile",
+      "id": "T06",
+      "name": "\"오늘 얼마예요?\" 단가 안내 문구 복사",
+      "ok": true,
+      "ms": 43,
+      "note": "[행복금은방] 9/28(월) 13:25 기준 매입 단가 (1돈=3.75g)"
+    },
+    {
+      "vp": "mobile",
+      "id": "T07",
+      "name": "견적 작성: 필수값 검증 + 3개 품목 합계",
+      "ok": true,
+      "ms": 614,
+      "note": "합계 1,854,300원"
+    },
+    {
+      "vp": "mobile",
+      "id": "T08",
+      "name": "공제 중량 > 총중량 오류 표시·삭제 버튼",
+      "ok": true,
+      "ms": 105,
+      "note": ""
+    },
+    {
+      "vp": "mobile",
+      "id": "T09",
+      "name": "견적 카드 만들기 → 미리보기",
+      "ok": true,
+      "ms": 148,
+      "note": "Q260928-001"
+    },
+    {
+      "vp": "mobile",
+      "id": "T10",
+      "name": "이미지 공유/저장 → PNG 생성",
+      "ok": true,
+      "ms": 219,
+      "note": "금견적-Q260928-001.png 1080x1408, 188KB"
+    },
+    {
+      "vp": "mobile",
+      "id": "T11",
+      "name": "카톡 문구 복사",
+      "ok": true,
+      "ms": 49,
+      "note": "15줄"
+    },
+    {
+      "vp": "mobile",
+      "id": "T12",
+      "name": "견적 링크 → 손님용 화면 (새 브라우저, 저장 데이터 없음)",
+      "ok": true,
+      "ms": 1674,
+      "note": "링크 길이 732자"
+    },
+    {
+      "vp": "mobile",
+      "id": "T13",
+      "name": "기록: 상태 변경·통계·새로고침 유지",
+      "ok": true,
+      "ms": 1262,
+      "note": ""
+    },
+    {
+      "vp": "mobile",
+      "id": "T14",
+      "name": "전용 버전 신청 폼 (전송은 모의 응답)",
+      "ok": true,
+      "ms": 363,
+      "note": "POST 본문에 form-name=custom-request, ref=e2e-test(유입 채널) 포함 확인"
+    },
+    {
+      "vp": "mobile",
+      "id": "T15",
+      "name": "백업 내보내기(JSON)",
+      "ok": true,
+      "ms": 76,
+      "note": "금견적-백업-260928.json"
+    },
+    {
+      "vp": "mobile",
+      "id": "T16",
+      "name": "레이아웃: 모든 탭 가로 스크롤 없음",
+      "ok": true,
+      "ms": 183,
+      "note": "시세표 폭 356/356px"
+    },
+    {
+      "vp": "mobile",
+      "id": "T17",
+      "name": "전체 초기화 → 예시 데이터 체험 흐름",
+      "ok": true,
+      "ms": 1862,
+      "note": "예시 합계 1,854,300원"
+    },
+    {
+      "vp": "mobile",
+      "id": "T18b",
+      "name": "조작 요소가 다른 레이어(호스팅 배지 등)에 가려지지 않음",
+      "ok": true,
+      "ms": 99,
+      "note": "8개 요소 elementFromPoint 확인"
+    },
+    {
+      "vp": "mobile",
+      "id": "T18",
+      "name": "콘솔 에러 0건",
+      "ok": true,
+      "ms": 0,
+      "note": ""
+    }
+  ]
+}

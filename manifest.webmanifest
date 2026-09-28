@@ -1,0 +1,9 @@
+{
+  "name": "금견적 - 금은방 매입 견적 카드",
+  "short_name": "금견적",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#faf7f0",
+  "theme_color": "#14213d",
+  "icons": [{ "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
